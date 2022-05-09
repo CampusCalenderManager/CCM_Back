@@ -5,6 +5,8 @@ package com.ccm.member.domain;
  */
 
 import lombok.AccessLevel;
+import lombok.Builder;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import javax.persistence.Column;
@@ -29,6 +31,11 @@ public class Member extends BaseTimeEntity {
 	private String password;
 	private String name;
 
-
+	@Builder
+	private Member(String username, String password, String name) {
+		this.username = username;
+		this.password = password;
+		this.name = name;
+	}
 
 }
