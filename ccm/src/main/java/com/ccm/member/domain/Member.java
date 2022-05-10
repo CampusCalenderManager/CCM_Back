@@ -38,4 +38,7 @@ public class Member extends BaseTimeEntity {
 		this.name = name;
 	}
 
+	public Member(long id) {
+		this.id = id;
+	}
 }

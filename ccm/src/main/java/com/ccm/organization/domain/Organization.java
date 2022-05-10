@@ -1,4 +1,4 @@
-package com.ccm.group.domain;
+package com.ccm.organization.domain;
 
 /**
  * Created by ShinD on 2022/05/09.
@@ -8,6 +8,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -23,24 +24,35 @@ import com.ccm.member.domain.Member;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
-@Table(name = "groups")
-public class Groups extends BaseTimeEntity {
+@Table(name = "organization")
+public class Organization extends BaseTimeEntity {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "groups_id")
+	@Column(name = "organization_id")
 	private Long id;
 
 	private String title;
 	private int memberNum;
 
 	private String description;
-	private String invitation_code;
+
+	@Embedded
+	private ParticipationCode participationCode;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "member_id")
-	private Member president_id;
+	private Member president;
 
+	public Organization(String title, String description, Member president) {
+		this.title = title;
+		this.description = description;
+		this.president = president;
+	}
 
+	public Organization(Long id) {
+		this.id = id;
+	}
 
-
-
+	public void issueParticipationCode() {
+		this.participationCode =  ParticipationCode.createRandom();
+	}
 }

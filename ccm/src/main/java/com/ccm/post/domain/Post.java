@@ -20,7 +20,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import com.ccm.common.BaseTimeEntity;
-import com.ccm.group.domain.Groups;
+import com.ccm.organization.domain.Organization;
 import com.ccm.member.domain.Member;
 
 @Getter
@@ -38,11 +38,11 @@ public class Post extends BaseTimeEntity {
 	private Type type;
 
 	private String content;
-	private String image_path;
+	private String imagePath;
 
 	@ManyToOne(fetch= FetchType.LAZY)
 	@JoinColumn(name="groups_id")
-	private Groups group;
+	private Organization group;
 
 	@ManyToOne(fetch= FetchType.LAZY)
 	@JoinColumn(name="writer_id")
