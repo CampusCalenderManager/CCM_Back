@@ -4,6 +4,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
+import com.ccm.organization.service.dto.OrganizationListDto;
 import com.ccm.organization_member.domain.OrganizationMember;
 import com.ccm.organization_member.domain.Role;
 import com.ccm.organization_member.repository.OrganizationMemberRepository;
@@ -33,9 +34,12 @@ public class OrganizationServiceImpl implements OrganizationService {
 	private final OrganizationMemberRepository organizationMemberRepository;
 
 	@Override
-	public ParticipationCode create(OrganizationCreateDto groupCreateDto) {
+	public ParticipationCode create(Long memberId, OrganizationCreateDto groupCreateDto) {
 
 		Organization groups = groupCreateDto.toEntity();
+
+		//요청을 보낸 사람과 그룹의 대표로 설정된 사람이 동일한지 확인
+		if (memberId.equals(groups.getPresident().getId())) throw new OrganizationException(OrganizationExceptionType.MISMATCH_MEMBER_PRESIDENT);
 
 		groups.issueParticipationCode();//참여코드 발급
 
@@ -47,13 +51,6 @@ public class OrganizationServiceImpl implements OrganizationService {
 	}
 
 
-	@Override
-	public OrganizationDto findById(Long groupId) {
-		return OrganizationDto.from(
-			organizationRepository.findById(groupId)
-				.orElseThrow(() -> new OrganizationException(OrganizationExceptionType.NOT_FOUND))
-		);
-	}
 
 
 
@@ -68,13 +65,19 @@ public class OrganizationServiceImpl implements OrganizationService {
 
 
 	@Override
-	public void apply(Long memberId, ParticipationCode participationCode) {
-		Organization groups = organizationRepository.findByParticipationCode(participationCode)
+	public void apply(Long memberId, Long organizationId, ParticipationCode participationCode) {
+
+		Organization organization = organizationRepository.findById(organizationId)
 			.orElseThrow(() -> new OrganizationException(OrganizationExceptionType.NOT_FOUND));
 
-		organizationMemberRepository.save(OrganizationMember.basic(new Member(memberId), groups));
+		if(!organization.matchCode(participationCode)) {
+			throw new OrganizationException(OrganizationExceptionType.MISMATCH_CODE);
+		}
 
+		organizationMemberRepository.save(OrganizationMember.basic(new Member(memberId), organization));
 	}
+
+
 
 	@Override
 	public void resign(Long memberId, Long groupId) {
@@ -86,21 +89,38 @@ public class OrganizationServiceImpl implements OrganizationService {
 
 
 	@Override
-	public void search(OrganizationSearchCond groupSearchCond) {
-
-	}
-
-	@Override
-	public void findJoined(Long memberId) {
-		organizationMemberRepository.findByMember(new Member(memberId));
+	public OrganizationListDto search(OrganizationSearchCond groupSearchCond) {
+		//TODO : 구현
+		return null;
 	}
 
 
+
 	@Override
-	public void changeMemberRole(Long memberId, Long organizationId, Role role) {
-		organizationMemberRepository.findByMemberAndOrganization(new Member(memberId), new Organization(organizationId))
+	public OrganizationListDto findJoined(Long memberId) {
+		return OrganizationListDto.from(organizationMemberRepository.findByMember(new Member(memberId)));
+	}
+
+
+
+
+	@Override
+	public void changeMemberRole(Long requesterId ,Long targetMemberId, Long organizationId, Role role) {
+		OrganizationMember organizationMember = organizationMemberRepository.findByMemberAndOrganization(
+				new Member(requesterId), new Organization(organizationId))
+			.orElseThrow(() -> new OrganizationException(OrganizationExceptionType.NOT_FOUND));
+
+
+		if( organizationMember.checkRole(Role.PRESIDENT, Role.ADMIN))
+			throw new OrganizationException(OrganizationExceptionType.NO_AUTHORITY);
+
+
+
+		organizationMemberRepository.findByMemberAndOrganization(new Member(targetMemberId), new Organization(organizationId))
 			.orElseThrow(() -> new OrganizationException(OrganizationExceptionType.NOT_FOUND))
 			.changeRole(role);
 	}
+
+
 
 }

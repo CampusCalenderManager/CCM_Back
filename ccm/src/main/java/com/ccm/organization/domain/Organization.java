@@ -5,6 +5,7 @@ package com.ccm.organization.domain;
  */
 
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import javax.persistence.Column;
@@ -42,6 +43,7 @@ public class Organization extends BaseTimeEntity {
 	@JoinColumn(name = "member_id")
 	private Member president;
 
+	@Builder
 	public Organization(String title, String description, Member president) {
 		this.title = title;
 		this.description = description;
@@ -52,7 +54,19 @@ public class Organization extends BaseTimeEntity {
 		this.id = id;
 	}
 
+
+
+
+
 	public void issueParticipationCode() {
 		this.participationCode =  ParticipationCode.createRandom();
+	}
+
+	public boolean matchCode(ParticipationCode participationCode) {
+		return this.participationCode.match(participationCode);
+	}
+
+	public void setPresident(Member member) {
+		this.president = member;
 	}
 }

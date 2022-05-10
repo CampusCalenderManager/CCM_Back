@@ -19,6 +19,8 @@ public class ParticipationCode {
 	@Column(name = "participation_code")
 	private String code;
 
+
+
 	public ParticipationCode(String code) {
 		this.code = code;
 	}
@@ -27,4 +29,11 @@ public class ParticipationCode {
 		return new ParticipationCode(UUID.randomUUID().toString());
 	}
 
+	public static ParticipationCode from(String code) {
+		return new ParticipationCode(code);
+	}
+
+	public boolean match(ParticipationCode participationCode) {
+		return participationCode.getCode().equals(this.getCode());
+	}
 }
