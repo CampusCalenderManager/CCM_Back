@@ -6,6 +6,8 @@ package com.ccm.schedule.domain;
 
 import com.ccm.common.BaseTimeEntity;
 import com.ccm.member.domain.Member;
+import com.ccm.organization.domain.Organization;
+
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -41,8 +43,15 @@ public class Schedule extends BaseTimeEntity {
 	@JoinColumn(name = "member_id")
 	private Member member;
 
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "organization_id")
+	private Organization organization;
+
+
+
 	@Builder
-	public Schedule(String title, LocalDateTime startDate, LocalDateTime endDate, LocalDateTime startAlarm, LocalDateTime endAlarm, boolean isShared, String color, Member member) {
+	public Schedule(String title, LocalDateTime startDate, LocalDateTime endDate, LocalDateTime startAlarm, LocalDateTime endAlarm, boolean isShared, String color, Member member, Organization organization) {
 		this.title = title;
 		this.startDate = startDate;
 		this.endDate = endDate;
@@ -51,6 +60,7 @@ public class Schedule extends BaseTimeEntity {
 		this.isShared = isShared;
 		this.color = color;
 		this.member = member;
+		this.organization = organization;
 	}
 
 

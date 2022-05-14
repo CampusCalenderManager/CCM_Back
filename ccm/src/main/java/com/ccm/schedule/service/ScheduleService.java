@@ -4,6 +4,7 @@
 
 package com.ccm.schedule.service;
 
+import com.ccm.schedule.domain.Schedule;
 import com.ccm.schedule.service.dto.*;
 
 public interface ScheduleService {
@@ -17,5 +18,6 @@ public interface ScheduleService {
     void update(Long scheduleId, UpdateScheduleDto updateScheduleDto);
     void delete(Long scheduleId, Long memberId);
     ScheduleDto findOne(Long scheduleId);
+    ScheduleListDto getAllByMemberId(Long memberId);
     ScheduleListDto search(ScheduleSearchCond scheduleSearchCond);
 }
