@@ -4,24 +4,15 @@ package com.ccm.schedule.domain;
  * Created by ShinD on 2022/05/09.
  */
 
-import java.time.LocalDateTime;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
 import com.ccm.common.BaseTimeEntity;
 import com.ccm.member.domain.Member;
-
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -50,6 +41,48 @@ public class Schedule extends BaseTimeEntity {
 	@JoinColumn(name = "member_id")
 	private Member member;
 
+	@Builder
+	public Schedule(String title, LocalDateTime startDate, LocalDateTime endDate, LocalDateTime startAlarm, LocalDateTime endAlarm, boolean isShared, String color, Member member) {
+		this.title = title;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.startAlarm = startAlarm;
+		this.endAlarm = endAlarm;
+		this.isShared = isShared;
+		this.color = color;
+		this.member = member;
+	}
 
 
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public void setStartDate(LocalDateTime startDate) {
+		this.startDate = startDate;
+	}
+
+	public void setEndDate(LocalDateTime endDate) {
+		this.endDate = endDate;
+	}
+
+	public void setStartAlarm(LocalDateTime startAlarm) {
+		this.startAlarm = startAlarm;
+	}
+
+	public void setEndAlarm(LocalDateTime endAlarm) {
+		this.endAlarm = endAlarm;
+	}
+
+	public void setShared(boolean shared) {
+		isShared = shared;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
+	}
+
+	public void setMember(Member member) {
+		this.member = member;
+	}
 }
