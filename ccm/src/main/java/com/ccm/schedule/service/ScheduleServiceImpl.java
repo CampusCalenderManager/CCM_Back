@@ -4,6 +4,15 @@
 
 package com.ccm.schedule.service;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
+import com.ccm.member.domain.Member;
+import com.ccm.organization.domain.Organization;
+import com.ccm.organization.repository.OrganizationRepository;
+import com.ccm.organization_member.domain.OrganizationMember;
+import com.ccm.organization_member.repository.OrganizationMemberRepository;
 import com.ccm.schedule.domain.Schedule;
 import com.ccm.schedule.repository.ScheduleRepository;
 import com.ccm.schedule.service.dto.*;
@@ -16,11 +25,17 @@ import javax.transaction.Transactional;
 @Transactional
 @RequiredArgsConstructor
 public class ScheduleServiceImpl implements ScheduleService {
+
     private final ScheduleRepository scheduleRepository;
+    private final OrganizationRepository organizationRepository;
+    private final OrganizationMemberRepository organizationMemberRepository;
+
+
 
     @Override
     public void create(CreateScheduleDto createScheduleDto) {
         Schedule schedule = createScheduleDto.toEntity();
+
         scheduleRepository.save(schedule);
     }
 
@@ -50,8 +65,35 @@ public class ScheduleServiceImpl implements ScheduleService {
         return ScheduleDto.from(schedule);
     }
 
+
+
+
     @Override
     public ScheduleListDto search(ScheduleSearchCond scheduleSearchCond) {
+
         return null;
+    }
+
+
+    @Override
+    public ScheduleListDto getAllByMemberId(Long memberId) {
+        List<OrganizationMember> organizationMembers = organizationMemberRepository.findByMember(new Member(memberId));
+
+        List<Long> organizationIds = organizationMembers.stream()
+            .map(OrganizationMember::getOrganization)
+            .map(Organization::getId).toList();
+
+        List<Schedule> organizationSchedules = scheduleRepository.findAllByOrganizationIdAndSharedTrue(
+            organizationIds);
+        List<Schedule> mySchedules = scheduleRepository.findAllByMemberId(memberId);
+
+
+
+        ArrayList<Schedule> schedules = new ArrayList<>(organizationSchedules);
+        schedules.removeAll(mySchedules);
+        schedules.addAll(mySchedules);
+
+        return ScheduleListDto.from(schedules);
+
     }
 }
