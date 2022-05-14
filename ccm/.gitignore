@@ -35,3 +35,12 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### Intellij Idea ###
+.idea
+.idea_modules
+
+
+application-local.yml
+.DS_Store
+application-jwt.yml

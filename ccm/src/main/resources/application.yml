@@ -1,0 +1,4 @@
+spring:
+  profiles:
+    include: local, jwt
+    active: local, jwt
