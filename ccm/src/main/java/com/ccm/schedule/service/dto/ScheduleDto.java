@@ -7,10 +7,10 @@ package com.ccm.schedule.service.dto;
 import java.time.LocalDateTime;
 
 import com.ccm.member.service.dto.MemberDto;
+import com.ccm.organization.service.dto.OrganizationDto;
 import com.ccm.schedule.domain.Schedule;
 
 import lombok.Builder;
-import lombok.Getter;
 
 public record ScheduleDto(Long id,
                           String title,
@@ -20,12 +20,13 @@ public record ScheduleDto(Long id,
                           LocalDateTime endAlarm,
                           boolean isShared,
                           String color,
-                          MemberDto memberDto){
+                          MemberDto memberDto,
+                          OrganizationDto organizationDto){
 
 
 
     @Builder
-    public ScheduleDto(Long id, String title, LocalDateTime startDate, LocalDateTime endDate, LocalDateTime startAlarm, LocalDateTime endAlarm, boolean isShared, String color, MemberDto memberDto) {
+    public ScheduleDto(Long id, String title, LocalDateTime startDate, LocalDateTime endDate, LocalDateTime startAlarm, LocalDateTime endAlarm, boolean isShared, String color, MemberDto memberDto, OrganizationDto organizationDto) {
         this.id = id;
         this.title = title;
         this.startDate = startDate;
@@ -35,6 +36,7 @@ public record ScheduleDto(Long id,
         this.isShared = isShared;
         this.color = color;
         this.memberDto = memberDto;
+        this.organizationDto = organizationDto;
     }
 
     public static ScheduleDto from(Schedule schedule) {
@@ -48,6 +50,7 @@ public record ScheduleDto(Long id,
                 .isShared(schedule.isShared())
                 .color(schedule.getColor())
                 .memberDto(MemberDto.from(schedule.getMember()))
+                .organizationDto(OrganizationDto.from(schedule.getOrganization()))
                 .build();
     }
 }

@@ -2,16 +2,14 @@
  * Created by VertexToEdge on 2022/5/10.
  */
 
-package com.ccm.schedule.service.dto;
+package com.ccm.schedule.controller.dto;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
 
-import lombok.Builder;
-import lombok.Getter;
+import com.ccm.schedule.service.dto.UpdateScheduleDto;
 
-@Builder
-public class UpdateScheduleDto {
+public class UpdateScheduleRequest {
 
     private String title;
 
@@ -50,5 +48,17 @@ public class UpdateScheduleDto {
     }
     public Optional<String> getColor() {
         return Optional.ofNullable(this.color);
+    }
+
+    public UpdateScheduleDto toServiceDto() {
+        return UpdateScheduleDto.builder()
+            .title(title)
+            .startDate(startDate)
+            .endDate(endDate)
+            .startAlarm(startAlarm)
+            .endAlarm(endAlarm)
+            .isShared(isShared)
+            .color(color)
+            .build();
     }
 }

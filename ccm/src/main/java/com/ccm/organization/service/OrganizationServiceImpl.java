@@ -73,8 +73,13 @@ public class OrganizationServiceImpl implements OrganizationService {
 		if(!organization.matchCode(participationCode)) {
 			throw new OrganizationException(OrganizationExceptionType.MISMATCH_CODE);
 		}
+		organizationMemberRepository.findByMemberAndOrganization(new Member(memberId), new Organization(organizationId)).ifPresent(i ->{
+			throw new OrganizationException(OrganizationExceptionType.ALREADY_JOIN);
+		});
 
 		organizationMemberRepository.save(OrganizationMember.basic(new Member(memberId), organization));
+
+		organization.plusMemberNum();
 	}
 
 

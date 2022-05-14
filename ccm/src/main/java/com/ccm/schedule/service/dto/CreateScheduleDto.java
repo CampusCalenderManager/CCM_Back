@@ -5,6 +5,7 @@
 package com.ccm.schedule.service.dto;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 import com.ccm.organization.domain.Organization;
 import com.ccm.schedule.domain.Schedule;
@@ -19,6 +20,7 @@ public record CreateScheduleDto(String title,
 							   boolean isShared,
 							   String color,
 							   Long organizationId) {
+
 
 
 	@Builder
@@ -43,7 +45,6 @@ public record CreateScheduleDto(String title,
 			.endAlarm(endAlarm)
 			.isShared(isShared)
 			.color(color)
-			.organization(new Organization(organizationId))
 			.build();
 	}
 }
