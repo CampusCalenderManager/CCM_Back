@@ -1,30 +1,25 @@
-package com.ccm.schedule.controller.dto;
+package com.ccm.schedule.service.dto;
 
 import java.time.LocalDateTime;
 
-import com.ccm.schedule.service.dto.CreateScheduleDto;
+import lombok.Builder;
+import lombok.Getter;
 
 /**
  * Created by ShinD on 2022/05/14.
  */
-public record CreateScheduleRequest(String title,
-									LocalDateTime startDate,
-									LocalDateTime endDate,
-									LocalDateTime startAlarm,
-									LocalDateTime endAlarm,
-									boolean isShared,
-									String color,
-									Long organizationId) {
+@Builder
+@Getter
+public class CreateScheduleDto {
 
-	public CreateScheduleDto toServiceDto() {
-		return CreateScheduleDto.builder().title(title)
-			.startDate(startDate)
-			.endDate(endDate)
-			.startAlarm(startAlarm)
-			.endAlarm(endAlarm)
-			.isShared(isShared)
-			.color(color)
-			.organizationId(organizationId)
-			.build();
-	}
+
+	private String title;
+	private LocalDateTime startDate;
+	private LocalDateTime endDate;
+	private LocalDateTime startAlarm;
+	private LocalDateTime endAlarm;
+	private boolean isShared;
+	private String color;
+	private Long organizationId;
+
 }
