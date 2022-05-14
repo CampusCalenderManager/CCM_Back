@@ -4,9 +4,12 @@ import java.time.LocalDateTime;
 
 import com.ccm.schedule.service.dto.CreateScheduleDto;
 
+import lombok.Builder;
+
 /**
  * Created by ShinD on 2022/05/14.
  */
+@Builder
 public record CreateScheduleRequest(String title,
 									LocalDateTime startDate,
 									LocalDateTime endDate,
@@ -17,7 +20,8 @@ public record CreateScheduleRequest(String title,
 									Long organizationId) {
 
 	public CreateScheduleDto toServiceDto() {
-		return CreateScheduleDto.builder().title(title)
+		return CreateScheduleDto.builder()
+			.title(title)
 			.startDate(startDate)
 			.endDate(endDate)
 			.startAlarm(startAlarm)
