@@ -9,6 +9,9 @@ import java.util.List;
 
 import com.ccm.schedule.domain.Schedule;
 
+import lombok.Getter;
+
+@Getter
 public class ScheduleListDto {
 
 

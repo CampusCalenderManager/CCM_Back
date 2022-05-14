@@ -69,4 +69,8 @@ public class Organization extends BaseTimeEntity {
 	public void setPresident(Member member) {
 		this.president = member;
 	}
+
+	public void plusMemberNum() {
+		this.memberNum++;
+	}
 }

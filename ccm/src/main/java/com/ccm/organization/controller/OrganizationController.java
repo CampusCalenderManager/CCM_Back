@@ -71,6 +71,7 @@ public class OrganizationController {
 	public ResponseEntity<?> apply(@PathVariable("organizationId") Long organizationId,
 									@RequestBody ParticipationCodeRequest participationCodeRequest){
 
+
 		organizationService.apply(securityService.getMemberId(),
 								  organizationId,
 								  ParticipationCode.from(participationCodeRequest.code()));

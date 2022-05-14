@@ -4,10 +4,14 @@
 
 package com.ccm.member.service.dto;
 
+import java.io.Serializable;
+
 import com.ccm.member.domain.Member;
 import lombok.Builder;
+import lombok.Getter;
 
-public class MemberDto {
+@Getter
+public class MemberDto{
     private String username;
     private String name;
 

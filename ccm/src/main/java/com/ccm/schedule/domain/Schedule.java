@@ -95,4 +95,8 @@ public class Schedule extends BaseTimeEntity {
 	public void setMember(Member member) {
 		this.member = member;
 	}
+
+	public void setOrganization(Organization organization) {
+		this.organization = organization;
+	}
 }
