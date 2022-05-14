@@ -4,6 +4,7 @@
 
 package com.ccm.schedule.service;
 
+import com.ccm.schedule.domain.Schedule;
 import com.ccm.schedule.service.dto.*;
 
 public interface ScheduleService {

@@ -23,5 +23,6 @@ public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
 	@Query("select s from Schedule s where s.organization.id in (:organizationIds) and s.isShared = true")
 	List<Schedule> findAllByOrganizationIdAndSharedTrue(@Param("organizationIds") List<Long> organizationIds);
 
+
 	List<Schedule> findAllByMemberId(Long memberId);
 }
