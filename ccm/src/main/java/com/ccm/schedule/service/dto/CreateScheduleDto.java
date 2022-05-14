@@ -4,27 +4,35 @@
 
 package com.ccm.schedule.service.dto;
 
-import com.ccm.member.domain.Member;
+import java.time.LocalDateTime;
+
 import com.ccm.organization.domain.Organization;
 import com.ccm.schedule.domain.Schedule;
 
-import java.time.LocalDateTime;
+import lombok.Builder;
 
-public class CreateScheduleDto {
-	private String title;
+public record CreateScheduleDto(String title,
+							   LocalDateTime startDate,
+							   LocalDateTime endDate,
+							   LocalDateTime startAlarm,
+							   LocalDateTime endAlarm,
+							   boolean isShared,
+							   String color,
+							   Long organizationId) {
 
-	private LocalDateTime startDate;
-	private LocalDateTime endDate;
 
-	private LocalDateTime startAlarm;
-	private LocalDateTime endAlarm;
-
-	private boolean isShared;
-
-	private String color;
-
-	private Long memberId;
-	private Long organizationId;
+	@Builder
+	public CreateScheduleDto(String title, LocalDateTime startDate, LocalDateTime endDate,
+		LocalDateTime startAlarm, LocalDateTime endAlarm, boolean isShared, String color, Long organizationId) {
+		this.title = title;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.startAlarm = startAlarm;
+		this.endAlarm = endAlarm;
+		this.isShared = isShared;
+		this.color = color;
+		this.organizationId = organizationId;
+	}
 
 	public Schedule toEntity() {
 		return Schedule.builder()
@@ -35,7 +43,6 @@ public class CreateScheduleDto {
 			.endAlarm(endAlarm)
 			.isShared(isShared)
 			.color(color)
-			.member(new Member(memberId))
 			.organization(new Organization(organizationId))
 			.build();
 	}

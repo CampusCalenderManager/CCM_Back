@@ -39,7 +39,7 @@ public class OrganizationServiceImpl implements OrganizationService {
 		Organization groups = groupCreateDto.toEntity();
 
 		//요청을 보낸 사람과 그룹의 대표로 설정된 사람이 동일한지 확인
-		if (memberId.equals(groups.getPresident().getId())) throw new OrganizationException(OrganizationExceptionType.MISMATCH_MEMBER_PRESIDENT);
+		groups.setPresident(new Member(memberId));
 
 		groups.issueParticipationCode();//참여코드 발급
 

@@ -4,7 +4,6 @@
 
 package com.ccm.schedule.service;
 
-import com.ccm.schedule.domain.Schedule;
 import com.ccm.schedule.service.dto.*;
 
 public interface ScheduleService {
@@ -14,9 +13,9 @@ public interface ScheduleService {
      * 스케줄 삭제
      * 스케줄 조회
      */
-    void create(CreateScheduleDto createScheduleDto);
-    void update(Long scheduleId, UpdateScheduleDto updateScheduleDto);
-    void delete(Long scheduleId, Long memberId);
+    ScheduleDto create(Long memberId, CreateScheduleDto createScheduleDto);
+    ScheduleDto update(Long memberId, Long scheduleId, UpdateScheduleDto updateScheduleDto);
+    void delete(Long memberId, Long scheduleId);
     ScheduleDto findOne(Long scheduleId);
     ScheduleListDto getAllByMemberId(Long memberId);
     ScheduleListDto search(ScheduleSearchCond scheduleSearchCond);

@@ -4,33 +4,29 @@
 
 package com.ccm.schedule.service.dto;
 
-import com.ccm.member.domain.Member;
-import com.ccm.member.service.dto.MemberDto;
-import com.ccm.schedule.domain.Schedule;
-import lombok.Builder;
-
-
 import java.time.LocalDateTime;
 
-public class ScheduleDto {
-    private String title;
+import com.ccm.member.service.dto.MemberDto;
+import com.ccm.schedule.domain.Schedule;
 
-    private LocalDateTime startDate;
-    private LocalDateTime endDate;
+import lombok.Builder;
+import lombok.Getter;
 
-    private LocalDateTime startAlarm;
-    private LocalDateTime endAlarm;
-
-    private boolean isShared;
-
-    private String color;
-
-    private MemberDto memberDto;
+public record ScheduleDto(Long id,
+                          String title,
+                          LocalDateTime startDate,
+                          LocalDateTime endDate,
+                          LocalDateTime startAlarm,
+                          LocalDateTime endAlarm,
+                          boolean isShared,
+                          String color,
+                          MemberDto memberDto){
 
 
 
     @Builder
-    public ScheduleDto(String title, LocalDateTime startDate, LocalDateTime endDate, LocalDateTime startAlarm, LocalDateTime endAlarm, boolean isShared, String color, MemberDto member) {
+    public ScheduleDto(Long id, String title, LocalDateTime startDate, LocalDateTime endDate, LocalDateTime startAlarm, LocalDateTime endAlarm, boolean isShared, String color, MemberDto memberDto) {
+        this.id = id;
         this.title = title;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -38,23 +34,12 @@ public class ScheduleDto {
         this.endAlarm = endAlarm;
         this.isShared = isShared;
         this.color = color;
-        this.memberDto = member;
+        this.memberDto = memberDto;
     }
 
-    public Schedule toEntity(Long id) {
-        return Schedule.builder()
-                .title(title)
-                .startDate(startDate)
-                .endDate(endDate)
-                .startAlarm(startAlarm)
-                .endAlarm(endAlarm)
-                .isShared(isShared)
-                .color(color)
-                .member(new Member(id))
-                .build();
-    }
     public static ScheduleDto from(Schedule schedule) {
         return ScheduleDto.builder()
+                .id(schedule.getId())
                 .title(schedule.getTitle())
                 .startDate(schedule.getStartDate())
                 .endDate(schedule.getEndDate())
@@ -62,7 +47,7 @@ public class ScheduleDto {
                 .endAlarm(schedule.getEndAlarm())
                 .isShared(schedule.isShared())
                 .color(schedule.getColor())
-                .member(MemberDto.from(schedule.getMember()))
+                .memberDto(MemberDto.from(schedule.getMember()))
                 .build();
     }
 }

@@ -6,14 +6,18 @@ package com.ccm.schedule.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import com.ccm.member.domain.Member;
+import com.ccm.member.exception.MemberException;
+import com.ccm.member.exception.MemberExceptionType;
+import com.ccm.member.repository.MemberRepository;
 import com.ccm.organization.domain.Organization;
 import com.ccm.organization.repository.OrganizationRepository;
 import com.ccm.organization_member.domain.OrganizationMember;
 import com.ccm.organization_member.repository.OrganizationMemberRepository;
 import com.ccm.schedule.domain.Schedule;
+import com.ccm.schedule.exception.ScheduleException;
+import com.ccm.schedule.exception.ScheduleExceptionType;
 import com.ccm.schedule.repository.ScheduleRepository;
 import com.ccm.schedule.service.dto.*;
 import lombok.RequiredArgsConstructor;
@@ -29,19 +33,31 @@ public class ScheduleServiceImpl implements ScheduleService {
     private final ScheduleRepository scheduleRepository;
     private final OrganizationRepository organizationRepository;
     private final OrganizationMemberRepository organizationMemberRepository;
+    private final MemberRepository memberRepository;
 
 
 
     @Override
-    public void create(CreateScheduleDto createScheduleDto) {
+    public ScheduleDto create(Long memberId, CreateScheduleDto createScheduleDto) {
         Schedule schedule = createScheduleDto.toEntity();
 
+        schedule.setMember(
+            memberRepository.findById(memberId).orElseThrow(()-> new MemberException(MemberExceptionType.NOT_FOUND))
+        );
+        organizationRepository.findById(createScheduleDto.organizationId()).orElseThrow(()->new ScheduleException(ScheduleExceptionType.NOT_FOUND_GROUP));
+
+
         scheduleRepository.save(schedule);
+
+        return ScheduleDto.from(schedule);
     }
 
     @Override
-    public void update(Long scheduleId, UpdateScheduleDto updateScheduleDto) {
+    public ScheduleDto update(Long memberId, Long scheduleId, UpdateScheduleDto updateScheduleDto) {
         Schedule schedule = scheduleRepository.findById(scheduleId).orElseThrow();
+
+        if(!schedule.getMember().getId().equals(memberId)) throw new ScheduleException(ScheduleExceptionType.NO_AUTHORITY);
+
         updateScheduleDto.getTitle().ifPresent(schedule::setTitle);
         updateScheduleDto.getStartDate().ifPresent(schedule::setStartDate);
         updateScheduleDto.getEndDate().ifPresent(schedule::setEndDate);
@@ -49,14 +65,18 @@ public class ScheduleServiceImpl implements ScheduleService {
         updateScheduleDto.getEndAlarm().ifPresent(schedule::setEndAlarm);
         updateScheduleDto.getShared().ifPresent(schedule::setShared);
         updateScheduleDto.getColor().ifPresent(schedule::setColor);
+
+        return ScheduleDto.from(schedule);
     }
 
     @Override
-    public void delete(Long scheduleId, Long memberId) {
+    public void delete(Long memberId, Long scheduleId) {
         Schedule schedule = scheduleRepository.findById(scheduleId).orElseThrow();
-        if (schedule.getId().equals(memberId)) {
-            scheduleRepository.delete(schedule);
-        }
+
+        if(!schedule.getMember().getId().equals(memberId)) throw new ScheduleException(ScheduleExceptionType.NO_AUTHORITY);
+
+        scheduleRepository.delete(schedule);
+
     }
 
     @Override
