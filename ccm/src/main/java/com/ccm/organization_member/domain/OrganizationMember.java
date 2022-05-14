@@ -3,6 +3,8 @@ package com.ccm.organization_member.domain;
 /**
  * Created by ShinD on 2022/05/09.
  */
+import java.util.Arrays;
+
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -62,5 +64,11 @@ public class OrganizationMember extends BaseTimeEntity {
 
 	public void changeRole(Role role) {
 		this.role = role;
+	}
+
+	public boolean checkRole(Role ...roles) {
+
+		return Arrays.stream(roles).anyMatch(role -> role.equals(this.getRole()));
+
 	}
 }
