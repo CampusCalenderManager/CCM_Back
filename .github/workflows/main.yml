@@ -35,10 +35,11 @@ jobs:
         run: |
           ls
           pwd
-          git clone https://github.com/CampusCalenderManager/CCM_Back
-          cd CCM_Back/ccm
-          docker-compose down
-          docker-compose up -d
+          echo $DB_HOST
+          #git clone https://github.com/CampusCalenderManager/CCM_Back
+          #cd CCM_Back/ccm
+          #docker-compose down
+          #docker-compose up -d
           
           
           
