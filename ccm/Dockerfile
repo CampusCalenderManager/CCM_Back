@@ -5,7 +5,8 @@ RUN unzip -d /opt/gradle gradle-7.4.2-bin.zip
 ENV PATH="${PATH}:/opt/gradle/gradle-7.4.2/bin:."
 RUN mkdir /ccm
 RUN cd /ccm
-COPY ./* ./
+COPY ./../* ./
+RUN cd /CCM_Back/ccm
 RUN /opt/gradle/gradle-7.4.2/bin/gradle wrapper
 RUN chmod +x gradlew
 RUN ./gradlew bootrun
