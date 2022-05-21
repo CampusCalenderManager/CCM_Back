@@ -39,7 +39,6 @@ jobs:
           chmod +x gradlew
           ./gradlew assemble
           docker-compose down
-          sudo docker-compose up --build
           echo -e "$RUNNER_PASSWORD\n" | sudo -S docker-compose up --build
           
           
