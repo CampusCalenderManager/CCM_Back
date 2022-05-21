@@ -4,4 +4,4 @@ RUN cd /ccm
 COPY ./* ./
 RUN chmod +x gradlew 
 RUN ./gradlew dependency
-ENTRYPOINT ["./gradlew" , "bootrun"]
+RUN ./gradlew bootrun
