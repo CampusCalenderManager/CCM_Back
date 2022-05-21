@@ -4,4 +4,6 @@ RUN mkdir /ccm
 RUN cd /ccm
 COPY ./* ./
 RUN chmod +x gradlew
+RUN gradle wrapper
+RUN ./gradlew dependency
 RUN ./gradlew bootrun
