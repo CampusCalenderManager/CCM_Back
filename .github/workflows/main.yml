@@ -26,6 +26,12 @@ jobs:
       - uses: actions/checkout@v2
       - name: docker-run
         #uses: appleboy/ssh-action@v0.1.4
+        env:
+          DB_HOST            : ${{DB_HOST}}
+          DB_PASSWORD        : ${{DB_PASSWORD}}
+          DB_USER            : ${{DB_USER}}
+          JWT_EXPIRATION     : ${{JWT_EXPIRATION}}
+          JWT_SECRET         : ${{JWT_SECRET}}
         run: |
           ls
           pwd
