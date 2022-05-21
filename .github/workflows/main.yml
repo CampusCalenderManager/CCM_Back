@@ -33,12 +33,13 @@ jobs:
           JWT_EXPIRATION: ${{secrets.JWT_EXPIRATION}}
           JWT_SECRET: ${{secrets.JWT_SECRET}}
         run: |
-          git clone https://github.com/CampusCalenderManager/CCM_Back
-          cd CCM_Back/ccm
-          ls
-          pwd
+          cd /home/argos/CCM_Back/ccm
+          git pull
+          chmod +x gradlew
+          ./gradlew clean build
+          ./gradlew build -x test
           docker-compose down
-          docker-compose up -d
+          docker-compose up
           
           
           
