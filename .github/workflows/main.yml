@@ -32,6 +32,7 @@ jobs:
           DB_USER: ${{secrets.DB_USER}}
           JWT_EXPIRATION: ${{secrets.JWT_EXPIRATION}}
           JWT_SECRET: ${{secrets.JWT_SECRET}}
+          RUNNER_PASSWORD: ${{secrets.RUNNER_PASSWORD}}
         working-directory: /home/argos/CCM_Back/ccm
         run: |
           git pull
@@ -39,6 +40,7 @@ jobs:
           ./gradlew assemble
           docker-compose down
           sudo docker-compose up --build
+          echo $RUNNER_PASSWORD | sudo -S docker-compose up --build
           
           
           
