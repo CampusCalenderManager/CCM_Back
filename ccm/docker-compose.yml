@@ -8,7 +8,7 @@ services:
             MYSQL_USER: "${DB_USER}"
             MYSQL_PASSWORD: "${DB_PASSWORD}"
             MYSQL_ROOT_PASSWORD: "${DB_PASSWORD}"
-            MYSQL_ROOT_HOST=%
+            MYSQL_ROOT_HOST: "%"
         volumes:
             - ./db/conf.d:/etc/mysql/conf.d
             - ./db/data:/var/lib/mysql
