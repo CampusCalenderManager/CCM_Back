@@ -1,7 +1,3 @@
 FROM amd64/openjdk:17-jdk
-RUN microdnf install findutils
-RUN mkdir /ccm
-COPY ./ /ccm
-WORKDIR /ccm
-RUN chmod +x gradlew
-RUN ./gradlew bootrun
+COPY ./build/libs/ccm-0.0.1-SNAPSHOT.jar /ccm-0.0.1-SNAPSHOT.jar
+ENTRYPOINT ["java", "-jar", "ccm-0.0.1-SNAPSHOT.jar"]
