@@ -32,7 +32,7 @@ jobs:
           DB_USER: ${{secrets.DB_USER}}
           JWT_EXPIRATION: ${{secrets.JWT_EXPIRATION}}
           JWT_SECRET: ${{secrets.JWT_SECRET}}
-          RUNNER_PASSWORD: ${{secrets.RUNNER_PASSWORD}}
+          RUNNER_PASSWORD: ${{secrets.SSH_PASSWORD}}
         working-directory: /home/argos/CCM_Back/ccm
         run: |
           git pull
