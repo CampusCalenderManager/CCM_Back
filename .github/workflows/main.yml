@@ -32,15 +32,7 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: docker-run
         run: |
-          echo change dir
-          cd ..
-          cd ..
-          cd .. 
-          cd .. 
-          ls
-          echo ls!
-          pwd
-          cd /home/argos/ccm 
+          cd ccm
           dokcer-compose down
           docker-compose up -d
           
