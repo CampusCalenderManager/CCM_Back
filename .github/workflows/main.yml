@@ -33,6 +33,10 @@ jobs:
       - name: docker-run
         run: |
           echo change dir
+          cd ..
+          cd ..
+          cd .. 
+          echo pwd!
           pwd
           cd /home/argos/ccm 
           dokcer-compose down
