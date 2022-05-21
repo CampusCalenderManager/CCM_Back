@@ -33,13 +33,12 @@ jobs:
           JWT_EXPIRATION: ${{secrets.JWT_EXPIRATION}}
           JWT_SECRET: ${{secrets.JWT_SECRET}}
         run: |
+          git clone https://github.com/CampusCalenderManager/CCM_Back
+          cd CCM_Back/ccm
           ls
           pwd
-          echo $DB_HOST
-          #git clone https://github.com/CampusCalenderManager/CCM_Back
-          #cd CCM_Back/ccm
-          #docker-compose down
-          #docker-compose up -d
+          docker-compose down
+          docker-compose up -d
           
           
           
