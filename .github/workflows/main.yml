@@ -36,9 +36,7 @@ jobs:
         run: |
           git pull
           chmod +x gradlew
-          ./gradlew clean build
-          echo "start build"
-          ./gradlew build -x test
+          ./gradlew assemble
           docker-compose down
           docker-compose up
           
