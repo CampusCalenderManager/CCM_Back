@@ -36,7 +36,9 @@ jobs:
           cd ..
           cd ..
           cd .. 
-          echo pwd!
+          cd .. 
+          ls
+          echo ls!
           pwd
           cd /home/argos/ccm 
           dokcer-compose down
