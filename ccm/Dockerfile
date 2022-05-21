@@ -1,11 +1,13 @@
 FROM amd64/openjdk:17-jdk
-RUN microdnf install findutils wget  unzip
-RUN wget https://services.gradle.org/distributions/gradle-7.4.2-bin.zip
-RUN unzip -d /opt/gradle gradle-7.4.2-bin.zip
-ENV PATH="${PATH}:/opt/gradle/gradle-7.4.2/bin:/ccm"
-RUN mkdir /ccm
-RUN cd /ccm
-COPY ./* ./
-RUN /opt/gradle/gradle-7.4.2/bin/gradle wrapper
+RUN microdnf install findutils wget unzip git
+#RUN wget https://services.gradle.org/distributions/gradle-7.4.2-bin.zip
+#RUN unzip -d /opt/gradle gradle-7.4.2-bin.zip
+#ENV PATH="${PATH}:/opt/gradle/gradle-7.4.2/bin:/ccm"
+#RUN mkdir /ccm
+#RUN cd /ccm
+#COPY ./* ./
+#RUN /opt/gradle/gradle-7.4.2/bin/gradle wrapper
+RUN git clone https://github.com/CampusCalenderManager/CCM_Back
+RUN cd CCM_Back/ccm
 RUN chmod +x gradlew
 RUN ./gradlew bootrun
