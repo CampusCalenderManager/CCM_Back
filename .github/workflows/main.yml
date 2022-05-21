@@ -34,7 +34,7 @@ jobs:
           ifconfig
         
       - name: docker-run
-        uses: appleboy/ssh-action@v0.1.4
+        #uses: appleboy/ssh-action@v0.1.4
         run: |
           ls
           pwd
