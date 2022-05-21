@@ -7,7 +7,11 @@ plugins {
 group = 'com'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '17'
-mainClassName = 'com.ccm.CcmApplication'
+
+springBoot {
+	mainClass = 'com.ccm.CcmApplication'
+}
+
 
 configurations {
 	compileOnly {
