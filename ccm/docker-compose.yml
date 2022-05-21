@@ -15,7 +15,8 @@ services:
         restart: always
     app:
         container_name: ccm-app
-        build: .
+        #build: .
+        image: alpine:3.7
         environment:
           DB_USER: "${DB_USER}"
           DB_PASSWORD: "${DB_PASSWORD}"
