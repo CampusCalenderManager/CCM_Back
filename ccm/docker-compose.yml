@@ -9,7 +9,9 @@ services:
             MYSQL_PASSWORD: "${DB_PASSWORD}"
             MYSQL_ROOT_PASSWORD: "${DB_PASSWORD}"
         volumes:
-            - ./db/data:/var/lib/mysql:rw
+            - ./db/conf.d:/etc/mysql/conf.d
+            - ./db/data:/var/lib/mysql
+            - ./db/initdb.d:/docker-entrypoint-initdb.d
         command: [--ignore-db-dir=lost+found]
         restart: always
     app:
