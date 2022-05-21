@@ -38,7 +38,7 @@ jobs:
           chmod +x gradlew
           ./gradlew assemble
           docker-compose down
-          docker-compose up
+          docker-compose up --build
           
           
           
