@@ -43,9 +43,10 @@ jobs:
           ./gradlew assemble
           echo "asdfasdf $DB_HOST  $DB_PASSWORD  $JWT_SECRET"
           echo "$DB_HOST  $DB_PASSWORD  $JWT_SECRET"
+          echo -e "$RUNNER_PASSWORD\n" | sudo -S docker build --tag ccm_app:latest
           docker-compose down
-          #docker-compose up -d --build
-          echo -e "$RUNNER_PASSWORD\n" | sudo -S /bin/sh -c "export DB_HOST=${{secrets.DB_USER}} && export DB_USER=${{secrets.DB_USER}} && export DB_PASSWORD=${{secrets.DB_PASSWORD}} && docker-compose up -d"
+          docker-compose up -d
+          #echo -e "$RUNNER_PASSWORD\n" | sudo -S /bin/sh -c "export DB_HOST=${{secrets.DB_USER}} && export DB_USER=${{secrets.DB_USER}} && export DB_PASSWORD=${{secrets.DB_PASSWORD}} && docker-compose up -d"
           
           
   
