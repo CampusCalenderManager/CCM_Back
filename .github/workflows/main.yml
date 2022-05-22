@@ -44,7 +44,8 @@ jobs:
           echo "asdfasdf $DB_HOST  $DB_PASSWORD  $JWT_SECRET"
           echo "$DB_HOST  $DB_PASSWORD  $JWT_SECRET"
           docker-compose down
-          echo -e "$RUNNER_PASSWORD\n" | sudo -S docker-compose up -d --build
+          docker-compose up -d --build
+          #echo -e "$RUNNER_PASSWORD\n" | sudo -S docker-compose up -d --build
           
           
           
