@@ -27,11 +27,11 @@ jobs:
       - name: docker-run
         #uses: appleboy/ssh-action@v0.1.4
         env:
-        #  DB_HOST: ${{secrets.DB_HOST}}
-        #  DB_PASSWORD: ${{secrets.DB_PASSWORD}}
-        #  DB_USER: ${{secrets.DB_USER}}
-        #  JWT_EXPIRATION: ${{secrets.JWT_EXPIRATION}}
-        #  JWT_SECRET: ${{secrets.JWT_SECRET}}
+          DB_HOST: ${{secrets.DB_HOST}}
+          DB_PASSWORD: ${{secrets.DB_PASSWORD}}
+          DB_USER: ${{secrets.DB_USER}}
+          JWT_EXPIRATION: ${{secrets.JWT_EXPIRATION}}
+          JWT_SECRET: ${{secrets.JWT_SECRET}}
           RUNNER_PASSWORD: ${{secrets.SSH_PASSWORD}}
         working-directory: /home/argos/CCM_Back/ccm
         run: |
