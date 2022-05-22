@@ -14,6 +14,11 @@ services:
             - ./db/data:/var/lib/mysql
             - ./db/initdb.d:/docker-entrypoint-initdb.d
         restart: always
+        healthcheck:
+            test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+            interval: 3s
+            timeout: 10s
+            retries: 500
     app:
         container_name: ccm-app
         build: .
@@ -24,7 +29,8 @@ services:
           JWT_SECRET: "${JWT_SECRET}"
           JWT_EXPIRATION: "${JWT_EXPIRATION}"
         depends_on:
-                - db
+          db:
+            condition: service_healthy
         ports:
                 - 80:8080
         restart: always
