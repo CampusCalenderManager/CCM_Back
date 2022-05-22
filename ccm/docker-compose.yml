@@ -4,11 +4,10 @@ services:
         container_name: spring-db
         image: mysql:8
         environment:
-            MYSQL_DATABASE: ccm
-            MYSQL_USER: "${DB_USER}"
-            MYSQL_PASSWORD: "${DB_PASSWORD}"
-            MYSQL_ROOT_PASSWORD: "${DB_PASSWORD}"
-            MYSQL_ROOT_HOST: "%"
+            - MYSQL_DATABASE=ccm
+            - MYSQL_USER=$DB_USER
+            - MYSQL_PASSWORD=$DB_PASSWORD
+            - MYSQL_ROOT_PASSWORD=$DB_PASSWORD
         volumes:
             - ./db/conf.d:/etc/mysql/conf.d
             - ./db/data:/var/lib/mysql
