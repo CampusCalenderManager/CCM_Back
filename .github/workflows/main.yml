@@ -36,6 +36,7 @@ jobs:
       - name: BuildAndDeploy
         #uses: appleboy/ssh-action@v0.1.4
         working-directory: /home/argos/CCM_Back/ccm
+        timeout-minutes: 60
         run: |
           git pull
           chmod +x gradlew
@@ -43,7 +44,7 @@ jobs:
           echo "asdfasdf $DB_HOST  $DB_PASSWORD  $JWT_SECRET"
           echo "$DB_HOST  $DB_PASSWORD  $JWT_SECRET"
           docker-compose down
-          echo -e "$RUNNER_PASSWORD\n" | sudo -S docker-compose up --build -d
+          echo -e "$RUNNER_PASSWORD\n" | sudo -S docker-compose up -d --build
           
           
           
