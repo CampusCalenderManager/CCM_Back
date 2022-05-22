@@ -23,11 +23,11 @@ services:
         container_name: ccm-app
         build: .
         environment:
-          DB_USER: "${DB_USER}"
-          DB_PASSWORD: "${DB_PASSWORD}"
-          DB_HOST: "${DB_HOST}"
-          JWT_SECRET: "${JWT_SECRET}"
-          JWT_EXPIRATION: "${JWT_EXPIRATION}"
+          - DB_USER
+          - DB_PASSWORD
+          - DB_HOST
+          - JWT_SECRET
+          - JWT_EXPIRATION
         depends_on:
           db:
             condition: service_healthy
