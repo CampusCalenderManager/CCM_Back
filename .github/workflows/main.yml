@@ -40,7 +40,7 @@ jobs:
           git pull
           chmod +x gradlew
           ./gradlew assemble
-          echo "$DB_HOST  $DB_PASSWORD  $JWT_SECRET"
+          echo "asdfasdf $DB_HOST  $DB_PASSWORD  $JWT_SECRET"
           echo "$DB_HOST  $DB_PASSWORD  $JWT_SECRET"
           docker-compose down
           echo -e "$RUNNER_PASSWORD\n" | sudo -S docker-compose up --build -d
