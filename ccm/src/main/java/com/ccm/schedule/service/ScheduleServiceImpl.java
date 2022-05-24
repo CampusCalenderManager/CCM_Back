@@ -86,6 +86,7 @@ public class ScheduleServiceImpl implements ScheduleService {
         if(!schedule.getMember().getId().equals(memberId)) throw new ScheduleException(ScheduleExceptionType.NO_AUTHORITY);
 
         updateScheduleDto.getTitle().ifPresent(schedule::setTitle);
+        updateScheduleDto.getContent().ifPresent(schedule::setContent);
         updateScheduleDto.getStartDate().ifPresent(schedule::setStartDate);
         updateScheduleDto.getEndDate().ifPresent(schedule::setEndDate);
         updateScheduleDto.getStartAlarm().ifPresent(schedule::setStartAlarm);

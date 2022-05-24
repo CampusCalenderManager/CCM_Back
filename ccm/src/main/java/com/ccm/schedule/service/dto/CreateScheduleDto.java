@@ -11,7 +11,9 @@ import lombok.Getter;
  * Created by ShinD on 2022/05/14.
  */
 @Builder
-public record CreateScheduleDto(String title, LocalDateTime startDate,
+public record CreateScheduleDto(String title,
+								String content,
+								LocalDateTime startDate,
 								LocalDateTime endDate,
 								LocalDateTime startAlarm,
 								LocalDateTime endAlarm,
@@ -22,6 +24,7 @@ public record CreateScheduleDto(String title, LocalDateTime startDate,
 	public Schedule toEntity() {
 		return Schedule.builder()
 			.title(title)
+			.content(content)
 			.startDate(startDate)
 			.endDate(endDate)
 			.startAlarm(startAlarm)

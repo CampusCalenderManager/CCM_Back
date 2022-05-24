@@ -27,6 +27,7 @@ public class Schedule extends BaseTimeEntity {
 	private Long id;
 
 	private String title;
+	private String content;
 
 	private LocalDateTime startDate;
 	private LocalDateTime endDate;
@@ -51,8 +52,9 @@ public class Schedule extends BaseTimeEntity {
 
 
 	@Builder
-	public Schedule(String title, LocalDateTime startDate, LocalDateTime endDate, LocalDateTime startAlarm, LocalDateTime endAlarm, boolean isShared, String color, Member member, Organization organization) {
+	public Schedule(String title,String content, LocalDateTime startDate, LocalDateTime endDate, LocalDateTime startAlarm, LocalDateTime endAlarm, boolean isShared, String color, Member member, Organization organization) {
 		this.title = title;
+		this.content = content;
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.startAlarm = startAlarm;
@@ -98,5 +100,9 @@ public class Schedule extends BaseTimeEntity {
 
 	public void setOrganization(Organization organization) {
 		this.organization = organization;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
 	}
 }

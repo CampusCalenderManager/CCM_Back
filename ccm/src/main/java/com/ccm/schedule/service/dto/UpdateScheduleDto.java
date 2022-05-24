@@ -14,6 +14,7 @@ import lombok.Getter;
 public class UpdateScheduleDto {
 
     private String title;
+    private String content;
 
     private LocalDateTime startDate;
     private LocalDateTime endDate;
@@ -31,6 +32,7 @@ public class UpdateScheduleDto {
     public Optional<String> getTitle() {
         return Optional.ofNullable(this.title);
     }
+    public Optional<String> getContent() {return Optional.ofNullable(this.content);}
 
     public Optional<LocalDateTime> getStartDate() {
         return Optional.ofNullable(this.startDate);
