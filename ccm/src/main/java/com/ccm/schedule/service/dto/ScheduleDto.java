@@ -17,8 +17,8 @@ public record ScheduleDto(Long id,
                           LocalDateTime startDate,
                           LocalDateTime endDate,
                           LocalDateTime startAlarm,
-                          LocalDateTime endAlarm,
                           boolean isShared,
+                          boolean isAlarm,
                           String color,
                           MemberDto memberDto,
                           OrganizationDto organizationDto){
@@ -26,14 +26,14 @@ public record ScheduleDto(Long id,
 
 
     @Builder
-    public ScheduleDto(Long id, String title, LocalDateTime startDate, LocalDateTime endDate, LocalDateTime startAlarm, LocalDateTime endAlarm, boolean isShared, String color, MemberDto memberDto, OrganizationDto organizationDto) {
+    public ScheduleDto(Long id, String title, LocalDateTime startDate, LocalDateTime endDate, LocalDateTime startAlarm, boolean isShared,boolean isAlarm, String color, MemberDto memberDto, OrganizationDto organizationDto) {
         this.id = id;
         this.title = title;
         this.startDate = startDate;
         this.endDate = endDate;
         this.startAlarm = startAlarm;
-        this.endAlarm = endAlarm;
         this.isShared = isShared;
+        this.isAlarm = isAlarm;
         this.color = color;
         this.memberDto = memberDto;
         this.organizationDto = organizationDto;
@@ -46,8 +46,8 @@ public record ScheduleDto(Long id,
                 .startDate(schedule.getStartDate())
                 .endDate(schedule.getEndDate())
                 .startAlarm(schedule.getStartAlarm())
-                .endAlarm(schedule.getEndAlarm())
                 .isShared(schedule.isShared())
+                .isAlarm(schedule.isAlarm())
                 .color(schedule.getColor())
                 .memberDto(MemberDto.from(schedule.getMember()))
                 .organizationDto(OrganizationDto.from(schedule.getOrganization()))

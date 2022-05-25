@@ -14,8 +14,8 @@ public record CreateScheduleRequest(String title,
 									LocalDateTime startDate,
 									LocalDateTime endDate,
 									LocalDateTime startAlarm,
-									LocalDateTime endAlarm,
 									boolean isShared,
+									boolean isAlarm,
 									String color,
 									Long organizationId) {
 
@@ -25,8 +25,8 @@ public record CreateScheduleRequest(String title,
 			.startDate(startDate)
 			.endDate(endDate)
 			.startAlarm(startAlarm)
-			.endAlarm(endAlarm)
 			.isShared(isShared)
+			.isAlarm(isShared)
 			.color(color)
 			.organizationId(organizationId)
 			.build();

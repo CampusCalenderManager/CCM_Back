@@ -15,22 +15,22 @@ public record ScheduleInfoResponse(Long id,
 								   LocalDateTime startDate,
 								   LocalDateTime endDate,
 								   LocalDateTime startAlarm,
-								   LocalDateTime endAlarm,
 								   boolean isShared,
+								   boolean isAlarm,
 								   String color,
 								   MemberDto memberDto) {
 
 
 	@Builder
 	public ScheduleInfoResponse(Long id, String title, LocalDateTime startDate, LocalDateTime endDate,
-		LocalDateTime startAlarm, LocalDateTime endAlarm, boolean isShared, String color, MemberDto memberDto) {
+		LocalDateTime startAlarm,boolean isShared,  boolean isAlarm, String color, MemberDto memberDto) {
 		this.id = id;
 		this.title = title;
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.startAlarm = startAlarm;
-		this.endAlarm = endAlarm;
 		this.isShared = isShared;
+		this.isAlarm = isAlarm;
 		this.color = color;
 		this.memberDto = memberDto;
 	}
@@ -42,8 +42,8 @@ public record ScheduleInfoResponse(Long id,
 			.startDate(scheduleDto.startDate())
 			.endDate(scheduleDto.endDate())
 			.startAlarm(scheduleDto.startAlarm())
-			.endAlarm(scheduleDto.endAlarm())
 			.isShared(scheduleDto.isShared())
+			.isAlarm(scheduleDto.isAlarm())
 			.color(scheduleDto.color())
 			.memberDto(scheduleDto.memberDto())
 			.build();

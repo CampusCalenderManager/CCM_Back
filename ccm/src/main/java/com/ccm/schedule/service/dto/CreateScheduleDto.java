@@ -10,16 +10,33 @@ import lombok.Getter;
 /**
  * Created by ShinD on 2022/05/14.
  */
-@Builder
-public record CreateScheduleDto(String title,
-								String content,
-								LocalDateTime startDate,
-								LocalDateTime endDate,
-								LocalDateTime startAlarm,
-								LocalDateTime endAlarm,
-								boolean isShared,
-								String color,
-								Long organizationId) {
+
+@Getter
+public class CreateScheduleDto {
+
+	private String title;
+	private String content;
+	private LocalDateTime startDate;
+	private LocalDateTime endDate;
+	private LocalDateTime startAlarm;
+	private boolean isShared;
+	private boolean isAlarm;
+	private String color;
+	private Long organizationId;
+
+	@Builder
+	public CreateScheduleDto(String title, String content, LocalDateTime startDate, LocalDateTime endDate,
+		LocalDateTime startAlarm, boolean isShared, boolean isAlarm, String color, Long organizationId) {
+		this.title = title;
+		this.content = content;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.startAlarm = startAlarm;
+		this.isShared = isShared;
+		this.isAlarm = isAlarm;
+		this.color = color;
+		this.organizationId = organizationId;
+	}
 
 	public Schedule toEntity() {
 		return Schedule.builder()
@@ -28,8 +45,8 @@ public record CreateScheduleDto(String title,
 			.startDate(startDate)
 			.endDate(endDate)
 			.startAlarm(startAlarm)
-			.endAlarm(endAlarm)
 			.isShared(isShared)
+			.isAlarm(isAlarm)
 			.color(color)
 			.build();
 	}

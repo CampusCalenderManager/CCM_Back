@@ -50,17 +50,17 @@ public class ScheduleServiceImpl implements ScheduleService {
             memberRepository.findById(memberId).orElseThrow(()-> new MemberException(MemberExceptionType.NOT_FOUND))
         );
 
-        if(createScheduleDto.organizationId() != null){
+        if(createScheduleDto.getOrganizationId() != null){
             schedule.setOrganization(
-                organizationRepository.findById(createScheduleDto.organizationId()).orElseThrow(() -> new OrganizationException(OrganizationExceptionType.NOT_FOUND))
+                organizationRepository.findById(createScheduleDto.getOrganizationId()).orElseThrow(() -> new OrganizationException(OrganizationExceptionType.NOT_FOUND))
                 );
         }
 
 
-        organizationRepository.findWithPresidentById(createScheduleDto.organizationId()).orElseThrow(()->new ScheduleException(ScheduleExceptionType.NOT_FOUND_GROUP));
+        organizationRepository.findWithPresidentById(createScheduleDto.getOrganizationId()).orElseThrow(()->new ScheduleException(ScheduleExceptionType.NOT_FOUND_GROUP));
 
         //공유시, 권한이 있는 회원인지 확인
-        checkAuthority(memberId, createScheduleDto.organizationId(), schedule);
+        checkAuthority(memberId, createScheduleDto.getOrganizationId(), schedule);
 
         scheduleRepository.save(schedule);
 
@@ -90,7 +90,7 @@ public class ScheduleServiceImpl implements ScheduleService {
         updateScheduleDto.getStartDate().ifPresent(schedule::setStartDate);
         updateScheduleDto.getEndDate().ifPresent(schedule::setEndDate);
         updateScheduleDto.getStartAlarm().ifPresent(schedule::setStartAlarm);
-        updateScheduleDto.getEndAlarm().ifPresent(schedule::setEndAlarm);
+        updateScheduleDto.getAlarm().ifPresent(schedule::setAlarm);
         updateScheduleDto.getShared().ifPresent(schedule::setShared);
         updateScheduleDto.getColor().ifPresent(schedule::setColor);
 

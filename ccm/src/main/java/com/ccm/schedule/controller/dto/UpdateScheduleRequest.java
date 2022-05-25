@@ -17,9 +17,10 @@ public class UpdateScheduleRequest {
     private LocalDateTime endDate;
 
     private LocalDateTime startAlarm;
-    private LocalDateTime endAlarm;
+
 
     private boolean isShared;
+    private boolean isAlarm;
 
     private String color;
 
@@ -40,11 +41,12 @@ public class UpdateScheduleRequest {
     public Optional<LocalDateTime> getStartAlarm() {
         return Optional.ofNullable(this.startAlarm);
     }
-    public Optional<LocalDateTime> getEndAlarm() {
-        return Optional.ofNullable(this.endAlarm);
-    }
+
     public Optional<Boolean> getShared() {
         return Optional.ofNullable(this.isShared);
+    }
+    public Optional<Boolean> getAlarm() {
+        return Optional.ofNullable(this.isAlarm);
     }
     public Optional<String> getColor() {
         return Optional.ofNullable(this.color);
@@ -56,8 +58,8 @@ public class UpdateScheduleRequest {
             .startDate(startDate)
             .endDate(endDate)
             .startAlarm(startAlarm)
-            .endAlarm(endAlarm)
             .isShared(isShared)
+            .isAlarm(isAlarm)
             .color(color)
             .build();
     }
