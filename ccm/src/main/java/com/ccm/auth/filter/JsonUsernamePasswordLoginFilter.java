@@ -92,6 +92,7 @@ public class JsonUsernamePasswordLoginFilter extends UsernamePasswordAuthenticat
 		infoMap.put("name", member.getName());
 		infoMap.put("id", member.getId().toString());
 
+		response.setContentType("application/json; charset=UTF-8");
 		response.getWriter().write(objectMapper.writeValueAsString(infoMap));
 	}
 }
