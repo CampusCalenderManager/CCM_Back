@@ -17,6 +17,7 @@ import com.ccm.organization.controller.dto.OrganizationCreateRequest;
 import com.ccm.organization.controller.dto.OrganizationInfoResponse;
 import com.ccm.organization.controller.dto.OrganizationListResponse;
 import com.ccm.organization.controller.dto.ParticipationCodeRequest;
+import com.ccm.organization.controller.dto.ParticipationCodeResponse;
 import com.ccm.organization.domain.ParticipationCode;
 import com.ccm.organization.service.OrganizationService;
 import com.ccm.organization.service.dto.OrganizationDto;
@@ -41,12 +42,12 @@ public class OrganizationController {
 	 * 그룹생성
 	 */
 	@PostMapping("/organization")
-	public ResponseEntity<?> create(@RequestBody OrganizationCreateRequest organizationCreateRequest){
+	public ResponseEntity<ParticipationCodeResponse> create(@RequestBody OrganizationCreateRequest organizationCreateRequest){
 
 		ParticipationCode participationCode =
 			organizationService.create(securityService.getMemberId(), organizationCreateRequest.toServiceDto());
 
-		return ResponseEntity.status(HttpStatus.CREATED).body(participationCode);
+		return ResponseEntity.status(HttpStatus.CREATED).body(ParticipationCodeResponse.from(participationCode));
 	}
 
 
