@@ -2,6 +2,7 @@ package com.ccm.auth.filter;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.FilterChain;
@@ -19,6 +20,10 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.util.StreamUtils;
 
 import com.ccm.auth.jwt.JwtService;
+import com.ccm.member.domain.Member;
+import com.ccm.member.exception.MemberException;
+import com.ccm.member.exception.MemberExceptionType;
+import com.ccm.member.repository.MemberRepository;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -31,13 +36,16 @@ public class JsonUsernamePasswordLoginFilter extends UsernamePasswordAuthenticat
 
 	private final ObjectMapper objectMapper;
 	private final JwtService jwtService;
+	private final MemberRepository memberRepository;
 
 	public JsonUsernamePasswordLoginFilter(AuthenticationManager authenticationManager,
 		ObjectMapper objectMapper,
-		JwtService jwtService) {
+		JwtService jwtService,
+		MemberRepository memberRepository) {
 		super(authenticationManager);
 		this.jwtService = jwtService;
 		this.objectMapper = objectMapper;
+		this.memberRepository = memberRepository;
 	}
 
 
@@ -75,5 +83,15 @@ public class JsonUsernamePasswordLoginFilter extends UsernamePasswordAuthenticat
 		jwtService
 			.sendToken(response , jwtService.createAccessToken(
 											Long.parseLong(((User) authResult.getPrincipal()).getUsername())));//getUsername 에는 회원의 PK, 즉 id 가 들어있음
+		Member member = memberRepository
+			.findById(Long.parseLong(((User)authResult.getPrincipal()).getUsername()))
+			.orElseThrow(() -> new MemberException(MemberExceptionType.NOT_FOUND));
+
+		HashMap<String ,String> infoMap = new HashMap<>();
+		infoMap.put("username", member.getUsername());
+		infoMap.put("name", member.getName());
+		infoMap.put("id", member.getId().toString());
+
+		response.getWriter().write(objectMapper.writeValueAsString(infoMap));
 	}
 }

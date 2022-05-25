@@ -59,7 +59,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	}
 
 	private Filter jsonUsernamePasswordLoginFilter() throws Exception {
-		return new JsonUsernamePasswordLoginFilter(authenticationManager(), objectMapper, jwtService);
+		return new JsonUsernamePasswordLoginFilter(authenticationManager(), objectMapper, jwtService, memberRepository);
 	}
 
 	@Bean
