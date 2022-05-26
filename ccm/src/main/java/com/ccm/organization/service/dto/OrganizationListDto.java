@@ -7,10 +7,14 @@ import com.ccm.organization.controller.dto.OrganizationInfoResponse;
 import com.ccm.organization.domain.Organization;
 import com.ccm.organization_member.domain.OrganizationMember;
 
+import lombok.Getter;
+
 /**
  * Created by ShinD on 2022/05/10.
  */
+@Getter
 public class OrganizationListDto {
+
 	List<OrganizationInfoResponse> organizationInfoResponseList = new ArrayList<>();
 	int total;
 
