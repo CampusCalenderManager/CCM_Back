@@ -12,16 +12,11 @@ import com.ccm.schedule.service.dto.UpdateScheduleDto;
 public class UpdateScheduleRequest {
 
     private String title;
-
     private LocalDateTime startDate;
     private LocalDateTime endDate;
-
     private LocalDateTime startAlarm;
-
-
     private boolean isShared;
     private boolean isAlarm;
-
     private String color;
 
 

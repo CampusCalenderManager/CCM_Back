@@ -5,7 +5,11 @@ import com.ccm.organization.service.dto.OrganizationDto;
 /**
  * Created by ShinD on 2022/05/10.
  */
-public record OrganizationInfoResponse( Long organizationId, String title, int memberNum,  String description, String presidentName)  {
+public record OrganizationInfoResponse( Long organizationId,
+										String title,
+										int memberNum,
+										String description,
+										String presidentName)  {
 
 	public static OrganizationInfoResponse from(OrganizationDto organizationDto) {
 		return new OrganizationInfoResponse(

@@ -45,7 +45,7 @@ public class OrganizationController {
 	public ResponseEntity<ParticipationCodeResponse> create(@RequestBody OrganizationCreateRequest organizationCreateRequest){
 
 		ParticipationCode participationCode =
-			organizationService.create(securityService.getMemberId(), organizationCreateRequest.toServiceDto());
+				organizationService.create(securityService.getMemberId(), organizationCreateRequest.toServiceDto());
 
 		return ResponseEntity.status(HttpStatus.CREATED).body(ParticipationCodeResponse.from(participationCode));
 	}
