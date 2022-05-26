@@ -16,7 +16,7 @@ public record CreateScheduleRequest(String title,
 									LocalDateTime startAlarm,
 									boolean isShared,
 									boolean isAlarm,
-									String color,
+									//String color,
 									Long organizationId) {
 
 	public CreateScheduleDto toServiceDto() {
@@ -27,7 +27,7 @@ public record CreateScheduleRequest(String title,
 			.startAlarm(startAlarm)
 			.isShared(isShared)
 			.isAlarm(isShared)
-			.color(color)
+			//.color(color)
 			.organizationId(organizationId)
 			.build();
 	}

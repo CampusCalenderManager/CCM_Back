@@ -21,12 +21,12 @@ public class CreateScheduleDto {
 	private LocalDateTime startAlarm;
 	private boolean isShared;
 	private boolean isAlarm;
-	private String color;
+	//private String color;
 	private Long organizationId;
 
 	@Builder
 	public CreateScheduleDto(String title, String content, LocalDateTime startDate, LocalDateTime endDate,
-		LocalDateTime startAlarm, boolean isShared, boolean isAlarm, String color, Long organizationId) {
+		LocalDateTime startAlarm, boolean isShared, boolean isAlarm, /*String color,*/ Long organizationId) {
 		this.title = title;
 		this.content = content;
 		this.startDate = startDate;
@@ -34,7 +34,7 @@ public class CreateScheduleDto {
 		this.startAlarm = startAlarm;
 		this.isShared = isShared;
 		this.isAlarm = isAlarm;
-		this.color = color;
+		//this.color = color;
 		this.organizationId = organizationId;
 	}
 
@@ -47,7 +47,7 @@ public class CreateScheduleDto {
 			.startAlarm(startAlarm)
 			.isShared(isShared)
 			.isAlarm(isAlarm)
-			.color(color)
+			//.color(color)
 			.build();
 	}
 }

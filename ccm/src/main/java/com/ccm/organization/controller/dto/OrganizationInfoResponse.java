@@ -7,6 +7,7 @@ import com.ccm.organization.service.dto.OrganizationDto;
  */
 public record OrganizationInfoResponse( Long organizationId,
 										String title,
+										String color,
 										int memberNum,
 										String description,
 										String presidentName)  {
@@ -15,6 +16,7 @@ public record OrganizationInfoResponse( Long organizationId,
 		return new OrganizationInfoResponse(
 			organizationDto.organizationId(),
 			organizationDto.title(),
+			organizationDto.color(),
 			organizationDto.memberNum(),
 			organizationDto.description(),
 			organizationDto.presidentName()

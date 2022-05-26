@@ -37,7 +37,7 @@ public class Schedule extends BaseTimeEntity {
 	private boolean isShared;
 	private boolean isAlarm;
 
-	private String color;
+	//private String color;
 
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -52,7 +52,7 @@ public class Schedule extends BaseTimeEntity {
 
 
 	@Builder
-	public Schedule(String title,String content, LocalDateTime startDate, LocalDateTime endDate, LocalDateTime startAlarm, boolean isShared,boolean isAlarm, String color, Member member, Organization organization) {
+	public Schedule(String title,String content, LocalDateTime startDate, LocalDateTime endDate, LocalDateTime startAlarm, boolean isShared,boolean isAlarm,  Member member, Organization organization) {
 		this.title = title;
 		this.content = content;
 		this.startDate = startDate;
@@ -60,7 +60,7 @@ public class Schedule extends BaseTimeEntity {
 		this.startAlarm = startAlarm;
 		this.isShared = isShared;
 		this.isAlarm = isAlarm;
-		this.color = color;
+		//this.color = color;
 		this.member = member;
 		this.organization = organization;
 	}
@@ -89,9 +89,9 @@ public class Schedule extends BaseTimeEntity {
 		this.isAlarm = isAlarm;
 	}
 
-	public void setColor(String color) {
+/*	public void setColor(String color) {
 		this.color = color;
-	}
+	}*/
 
 	public void setMember(Member member) {
 		this.member = member;

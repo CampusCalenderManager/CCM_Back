@@ -35,6 +35,7 @@ public class Organization extends BaseTimeEntity {
 	private int memberNum;
 
 	private String description;
+	private String color;
 
 	@Embedded
 	private ParticipationCode participationCode;
@@ -44,10 +45,11 @@ public class Organization extends BaseTimeEntity {
 	private Member president;
 
 	@Builder
-	public Organization(String title, String description, Member president) {
+	public Organization(String title, String description, Member president, String color) {
 		this.title = title;
 		this.description = description;
 		this.president = president;
+		this.color = color;
 	}
 
 	public Organization(Long id) {

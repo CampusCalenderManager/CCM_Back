@@ -92,7 +92,7 @@ public class ScheduleServiceImpl implements ScheduleService {
         updateScheduleDto.getStartAlarm().ifPresent(schedule::setStartAlarm);
         updateScheduleDto.getAlarm().ifPresent(schedule::setAlarm);
         updateScheduleDto.getShared().ifPresent(schedule::setShared);
-        updateScheduleDto.getColor().ifPresent(schedule::setColor);
+        //updateScheduleDto.getColor().ifPresent(schedule::setColor);
 
 
 

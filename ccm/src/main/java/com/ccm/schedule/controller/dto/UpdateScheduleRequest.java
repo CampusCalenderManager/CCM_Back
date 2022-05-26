@@ -17,7 +17,7 @@ public class UpdateScheduleRequest {
     private LocalDateTime startAlarm;
     private boolean isShared;
     private boolean isAlarm;
-    private String color;
+   // private String color;
 
 
 
@@ -43,9 +43,9 @@ public class UpdateScheduleRequest {
     public Optional<Boolean> getAlarm() {
         return Optional.ofNullable(this.isAlarm);
     }
-    public Optional<String> getColor() {
-        return Optional.ofNullable(this.color);
-    }
+    //public Optional<String> getColor() {
+  /*      return Optional.ofNullable(this.color);
+    }*/
 
     public UpdateScheduleDto toServiceDto() {
         return UpdateScheduleDto.builder()
@@ -55,7 +55,7 @@ public class UpdateScheduleRequest {
             .startAlarm(startAlarm)
             .isShared(isShared)
             .isAlarm(isAlarm)
-            .color(color)
+           // .color(color)
             .build();
     }
 }

@@ -19,14 +19,14 @@ public record ScheduleDto(Long id,
                           LocalDateTime startAlarm,
                           boolean isShared,
                           boolean isAlarm,
-                          String color,
+                          //String color,
                           MemberDto memberDto,
                           OrganizationDto organizationDto){
 
 
 
     @Builder
-    public ScheduleDto(Long id, String title, LocalDateTime startDate, LocalDateTime endDate, LocalDateTime startAlarm, boolean isShared,boolean isAlarm, String color, MemberDto memberDto, OrganizationDto organizationDto) {
+    public ScheduleDto(Long id, String title, LocalDateTime startDate, LocalDateTime endDate, LocalDateTime startAlarm, boolean isShared,boolean isAlarm,MemberDto memberDto, OrganizationDto organizationDto) {
         this.id = id;
         this.title = title;
         this.startDate = startDate;
@@ -34,7 +34,7 @@ public record ScheduleDto(Long id,
         this.startAlarm = startAlarm;
         this.isShared = isShared;
         this.isAlarm = isAlarm;
-        this.color = color;
+        //this.color = color;
         this.memberDto = memberDto;
         this.organizationDto = organizationDto;
     }
@@ -48,7 +48,7 @@ public record ScheduleDto(Long id,
                 .startAlarm(schedule.getStartAlarm())
                 .isShared(schedule.isShared())
                 .isAlarm(schedule.isAlarm())
-                .color(schedule.getColor())
+                //.color(schedule.getColor())
                 .memberDto(MemberDto.from(schedule.getMember()))
                 .organizationDto(OrganizationDto.from(schedule.getOrganization()))
                 .build();
