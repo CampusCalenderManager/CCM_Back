@@ -26,7 +26,7 @@ public class ParticipationCode {
 	}
 
 	public static ParticipationCode createRandom() {
-		return new ParticipationCode(UUID.randomUUID().toString());
+		return new ParticipationCode(UUID.randomUUID().toString().substring(0,5));
 	}
 
 	public static ParticipationCode from(String code) {
