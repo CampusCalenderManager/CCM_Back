@@ -65,15 +65,15 @@ public class OrganizationServiceImpl implements OrganizationService {
 
 
 	@Override
-	public void apply(Long memberId, Long organizationId, ParticipationCode participationCode) {
+	public void apply(Long memberId, ParticipationCode participationCode) {
 
-		Organization organization = organizationRepository.findById(organizationId)
+		Organization organization = organizationRepository.findByParticipationCode(participationCode)
 			.orElseThrow(() -> new OrganizationException(OrganizationExceptionType.NOT_FOUND));
 
-		if(!organization.matchCode(participationCode)) {
+		/*if(!organization.matchCode(participationCode)) {
 			throw new OrganizationException(OrganizationExceptionType.MISMATCH_CODE);
-		}
-		organizationMemberRepository.findByMemberAndOrganization(new Member(memberId), new Organization(organizationId)).ifPresent(i ->{
+		}*/
+		organizationMemberRepository.findByMemberAndOrganization(new Member(memberId), new Organization(organization.getId())).ifPresent(i ->{
 			throw new OrganizationException(OrganizationExceptionType.ALREADY_JOIN);
 		});
 

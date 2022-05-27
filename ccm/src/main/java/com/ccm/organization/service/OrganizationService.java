@@ -16,7 +16,7 @@ public interface OrganizationService {
 
 	OrganizationDto findByParticipationCode(ParticipationCode participationCode);//참여코드로 그룹 찾기 -> 정말 가입하시겠습니까?를 보여주기 위한 화면
 
-	void apply(Long memberId, Long organizationId,ParticipationCode participationCode);//가입 (참여코드 필수(보안? 관련해서))
+	void apply(Long memberId,ParticipationCode participationCode);//가입 (참여코드 필수(보안? 관련해서))
 
 	void resign(Long memberId, Long organizationIdId);//탈퇴
 

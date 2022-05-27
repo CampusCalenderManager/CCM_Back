@@ -10,7 +10,7 @@ import lombok.Builder;
 /**
  * Created by ShinD on 2022/05/14.
  */
-public record ScheduleInfoResponse(Long id,
+public record                                    ScheduleInfoResponse(Long id,
 								   String title,
 								   LocalDateTime startDate,
 								   LocalDateTime endDate,

@@ -54,7 +54,7 @@ public class OrganizationController {
 	/**
 	 * 참여 코드로 그룹 조회
 	 */
-	@GetMapping("/organization")
+	//@GetMapping("/organization")
 	public ResponseEntity<OrganizationInfoResponse> findBy(@RequestBody ParticipationCodeRequest participationCodeRequest){
 		OrganizationDto organizationDto = organizationService.findByParticipationCode(
 																ParticipationCode.from(participationCodeRequest.code()));
@@ -68,13 +68,11 @@ public class OrganizationController {
 	/**
 	 * 그룹 가입
 	 */
-	@PostMapping("/organization/member/{organizationId}")
-	public ResponseEntity<?> apply(@PathVariable("organizationId") Long organizationId,
-									@RequestBody ParticipationCodeRequest participationCodeRequest){
+	@PostMapping("/organization/member")
+	public ResponseEntity<?> apply(@RequestBody ParticipationCodeRequest participationCodeRequest){
 
 
 		organizationService.apply(securityService.getMemberId(),
-								  organizationId,
 								  ParticipationCode.from(participationCodeRequest.code()));
 
 		return ResponseEntity.ok().build();
